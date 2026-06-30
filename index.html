@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyFlow - Ultimate Study Planner & Productivity Suite</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">
+          <i data-lucide="sparkles"></i>
+        </div>
+        <span class="brand-name">StudyFlow</span>
+      </div>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="dashboard" id="nav-dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-tab="planner" id="nav-planner">
+          <i data-lucide="calendar-todo"></i>
+          <span>Planner</span>
+        </button>
+        <button class="nav-item" data-tab="pomodoro" id="nav-pomodoro">
+          <i data-lucide="timer"></i>
+          <span>Pomodoro</span>
+        </button>
+        <button class="nav-item" data-tab="flashcards" id="nav-flashcards">
+          <i data-lucide="layers"></i>
+          <span>Flashcards</span>
+        </button>
+        <button class="nav-item" data-tab="quizzes" id="nav-quizzes">
+          <i data-lucide="help-circle"></i>
+          <span>Quizzes</span>
+        </button>
+        <button class="nav-item" data-tab="reminders" id="nav-reminders">
+          <i data-lucide="bell"></i>
+          <span>Reminders</span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="theme-toggle" id="theme-toggle-btn">
+          <i data-lucide="moon"></i>
+          <span>Dark Mode</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+      <!-- Top header bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <h1 id="page-title">Dashboard</h1>
+          <p id="page-subtitle" class="text-secondary">Welcome back! Ready to excel today?</p>
+        </div>
+        <div class="header-right">
+          <div class="date-time-widget">
+            <span id="header-time" class="time-text">12:00 PM</span>
+            <span id="header-date" class="date-text">Tuesday, June 30</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="view-panel active" id="view-dashboard">
+        <!-- Dashboard Overview Grid -->
+        <div class="dashboard-grid">
+          <!-- Summary Cards -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-icon purple"><i data-lucide="hourglass"></i></div>
+              <div class="stat-info">
+                <h3>Focus Time</h3>
+                <p class="stat-value" id="dash-focus-time">0m</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green"><i data-lucide="check-square"></i></div>
+              <div class="stat-info">
+                <h3>Tasks Completed</h3>
+                <p class="stat-value" id="dash-tasks-done">0 / 0</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange"><i data-lucide="award"></i></div>
+              <div class="stat-info">
+                <h3>Quizzes Taken</h3>
+                <p class="stat-value" id="dash-quizzes-taken">0</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Dashboard Panels -->
+          <div class="dash-columns">
+            <div class="dash-left-column">
+              <!-- Focus/Pomodoro Fast Card -->
+              <div class="glass-card welcome-hero">
+                <div class="hero-content">
+                  <h2>Achieve Your Academic Goals</h2>
+                  <p>Start a Pomodoro session now to unlock flow state. Complete your tasks and reinforce learning with quick flashcards.</p>
+                  <button class="btn btn-primary" onclick="document.getElementById('nav-pomodoro').click()">
+                    <i data-lucide="play-circle"></i> Start Focus Session
+                  </button>
+                </div>
+                <div class="hero-graphic">
+                  <div class="g-circle circle-1"></div>
+                  <div class="g-circle circle-2"></div>
+                </div>
+              </div>
+
+              <!-- Quote of the Day -->
+              <div class="glass-card quote-card">
+                <i data-lucide="quote" class="quote-icon"></i>
+                <p id="motivational-quote">"The secret of getting ahead is getting started."</p>
+                <span id="motivational-author">- Mark Twain</span>
+              </div>
+            </div>
+
+            <div class="dash-right-column">
+              <!-- Today's Tasks -->
+              <div class="glass-card task-peek-card">
+                <div class="card-header">
+                  <h3>Today's Top Tasks</h3>
+                  <button class="btn btn-text" onclick="document.getElementById('nav-planner').click()">View All</button>
+                </div>
+                <div class="task-peek-list" id="dash-task-list">
+                  <p class="empty-state">No tasks for today. Add some in the Planner tab!</p>
+                </div>
+              </div>
+
+              <!-- Active Alarms / Reminders -->
+              <div class="glass-card reminder-peek-card">
+                <div class="card-header">
+                  <h3>Active Alarms</h3>
+                  <button class="btn btn-text" onclick="document.getElementById('nav-reminders').click()">Manage</button>
+                </div>
+                <div class="reminder-peek-list" id="dash-reminder-list">
+                  <p class="empty-state">No upcoming alarms scheduled.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View: Planner / To-Do -->
+      <div class="view-panel" id="view-planner">
+        <div class="planner-layout">
+          <!-- Add Task Form -->
+          <div class="glass-card planner-form-card">
+            <h3>Create New Task</h3>
+            <form id="add-task-form">
+              <div class="form-group">
+                <label for="task-title">Task Title</label>
+                <input type="text" id="task-title" placeholder="e.g., Read Physics Chapter 4" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="task-subject">Subject / Category</label>
+                  <input type="text" id="task-subject" placeholder="e.g., Physics, Math, General">
+                </div>
+                <div class="form-group">
+                  <label for="task-priority">Priority</label>
+                  <select id="task-priority">
+                    <option value="low">Low Priority</option>
+                    <option value="medium" selected>Medium Priority</option>
+                    <option value="high">High Priority</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="task-due">Due Date & Time</label>
+                <input type="datetime-local" id="task-due">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                <i data-lucide="plus-circle"></i> Add Task
+              </button>
+            </form>
+          </div>
+
+          <!-- Tasks List Section -->
+          <div class="planner-list-section">
+            <div class="list-filters-header">
+              <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="pending">Pending</button>
+                <button class="filter-tab" data-filter="completed">Completed</button>
+              </div>
+              <button class="btn btn-secondary btn-small" id="clear-completed-btn">
+                <i data-lucide="trash-2"></i> Clear Completed
+              </button>
+            </div>
+            <div class="tasks-container" id="tasks-container">
+              <!-- Filled dynamically by planner.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View: Pomodoro -->
+      <div class="view-panel" id="view-pomodoro">
+        <div class="pomodoro-layout">
+          <div class="glass-card pomodoro-card">
+            <!-- Timer Display -->
+            <div class="timer-display-container">
+              <svg class="timer-svg" viewBox="0 0 200 200">
+                <circle class="timer-track" cx="100" cy="100" r="88" />
+                <circle class="timer-progress" id="timer-progress-bar" cx="100" cy="100" r="88" />
+              </svg>
+              <div class="timer-text-content">
+                <div class="timer-mode" id="timer-mode-label">FOCUS SESSION</div>
+                <div class="timer-countdown" id="timer-time-display">25:00</div>
+              </div>
+            </div>
+
+            <!-- Presets / Mode Controls -->
+            <div class="timer-presets">
+              <button class="btn btn-preset active" data-mode="work">Focus</button>
+              <button class="btn btn-preset" data-mode="short">Short Break</button>
+              <button class="btn btn-preset" data-mode="long">Long Break</button>
+            </div>
+
+            <!-- Media / Control buttons -->
+            <div class="timer-controls">
+              <button class="btn-circle btn-secondary" id="timer-reset" title="Reset Timer">
+                <i data-lucide="rotate-ccw"></i>
+              </button>
+              <button class="btn-circle btn-primary btn-large" id="timer-play-pause" title="Start/Pause">
+                <i data-lucide="play" id="play-pause-icon"></i>
+              </button>
+              <button class="btn-circle btn-secondary" id="timer-skip" title="Skip to Next Mode">
+                <i data-lucide="skip-forward"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="pomodoro-settings-container">
+            <!-- Ambient Sounds Generator -->
+            <div class="glass-card ambient-card">
+              <h3>Ambient Audio</h3>
+              <p class="card-desc">Generate synthetic study soundscapes directly in your browser.</p>
+              <div class="sound-grid">
+                <button class="btn btn-sound" data-sound="rain">
+                  <i data-lucide="cloud-rain"></i> Rain
+                </button>
+                <button class="btn btn-sound" data-sound="noise">
+                  <i data-lucide="waves"></i> White Noise
+                </button>
+                <button class="btn btn-sound" data-sound="waves">
+                  <i data-lucide="wind"></i> Ocean Waves
+                </button>
+                <button class="btn btn-sound" data-sound="cafe">
+                  <i data-lucide="coffee"></i> Cafe Buzz
+                </button>
+              </div>
+              <div class="volume-slider-group">
+                <i data-lucide="volume-2"></i>
+                <input type="range" id="ambient-volume" min="0" max="1" step="0.05" value="0.5">
+              </div>
+            </div>
+
+            <!-- Custom Timer settings -->
+            <div class="glass-card config-card">
+              <h3>Timer Configuration</h3>
+              <div class="config-grid">
+                <div class="config-item">
+                  <label for="cfg-work">Focus (min)</label>
+                  <input type="number" id="cfg-work" min="1" max="120" value="25">
+                </div>
+                <div class="config-item">
+                  <label for="cfg-short">Short Break (min)</label>
+                  <input type="number" id="cfg-short" min="1" max="60" value="5">
+                </div>
+                <div class="config-item">
+                  <label for="cfg-long">Long Break (min)</label>
+                  <input type="number" id="cfg-long" min="1" max="60" value="15">
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-block" id="apply-timer-settings">Apply Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View: Flashcards -->
+      <div class="view-panel" id="view-flashcards">
+        <!-- Decks Home View -->
+        <div id="flashcards-home" class="flashcards-home-grid">
+          <div class="decks-header-bar">
+            <h3>Your Decks</h3>
+            <button class="btn btn-primary" id="open-create-deck-modal">
+              <i data-lucide="folder-plus"></i> New Deck
+            </button>
+          </div>
+          <div class="decks-container" id="decks-container">
+            <!-- Dynamic Deck cards -->
+          </div>
+        </div>
+
+        <!-- Single Deck Study Mode -->
+        <div id="flashcards-study" class="flashcard-study-view hidden">
+          <div class="study-header">
+            <button class="btn btn-secondary btn-small" id="study-back-btn">
+              <i data-lucide="arrow-left"></i> Back to Decks
+            </button>
+            <h3 id="study-deck-title">Deck Title</h3>
+            <span class="study-progress-text" id="study-progress-counter">Card 1 of 10</span>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="deck-progress-bar-container">
+            <div class="deck-progress-bar-fill" id="study-progress-bar" style="width: 10%"></div>
+          </div>
+
+          <!-- The Interactive Flip Card -->
+          <div class="card-flip-wrapper">
+            <div class="flip-card-inner" id="study-flip-card">
+              <!-- Front Side -->
+              <div class="flip-card-front">
+                <span class="card-side-label">QUESTION / FRONT</span>
+                <div class="card-content-display" id="study-front-text">Front side content goes here</div>
+                <span class="card-hint">Click card to reveal answer</span>
+              </div>
+              <!-- Back Side -->
+              <div class="flip-card-back">
+                <span class="card-side-label">ANSWER / BACK</span>
+                <div class="card-content-display" id="study-back-text">Back side content goes here</div>
+                <span class="card-hint">How did you do? Rate below</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Study controls -->
+          <div class="study-controls">
+            <!-- Flip trigger (if not clicking the card directly) -->
+            <button class="btn btn-secondary" id="study-flip-btn">
+              <i data-lucide="rotate-3d"></i> Flip Card
+            </button>
+
+            <!-- Self-assessment grades (shown when flipped to back) -->
+            <div class="rating-buttons-group hidden" id="rating-controls">
+              <button class="btn btn-danger" data-grade="hard">
+                <i data-lucide="alert-triangle"></i> Hard
+              </button>
+              <button class="btn btn-warning" data-grade="good">
+                <i data-lucide="smile"></i> Good
+              </button>
+              <button class="btn btn-success" data-grade="easy">
+                <i data-lucide="check-circle"></i> Easy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manage Deck Cards (Add / Remove cards in a deck) -->
+        <div id="flashcards-manage" class="flashcard-manage-view hidden">
+          <div class="manage-header">
+            <button class="btn btn-secondary btn-small" id="manage-back-btn">
+              <i data-lucide="arrow-left"></i> Back to Decks
+            </button>
+            <h3 id="manage-deck-title">Manage Deck: Chemistry</h3>
+          </div>
+          <div class="manage-content-split">
+            <!-- Card Creation form -->
+            <div class="glass-card card-form-card">
+              <h4>Add New Card</h4>
+              <form id="add-card-form">
+                <div class="form-group">
+                  <label for="card-front">Front Text (Question / Keyword)</label>
+                  <textarea id="card-front" rows="4" placeholder="Enter front content..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="card-back">Back Text (Answer / Explanation)</label>
+                  <textarea id="card-back" rows="4" placeholder="Enter back content..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add to Deck</button>
+              </form>
+            </div>
+            <!-- Cards list in this deck -->
+            <div class="cards-list-card">
+              <h4>Deck Cards (<span id="manage-cards-count">0</span>)</h4>
+              <div class="cards-list-container" id="manage-cards-list">
+                <!-- Cards render here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View: Quiz Maker -->
+      <div class="view-panel" id="view-quizzes">
+        <!-- Quiz Home View -->
+        <div id="quizzes-home" class="quiz-home-grid">
+          <div class="quiz-header-bar">
+            <h3>Your Custom Quizzes</h3>
+            <button class="btn btn-primary" id="open-create-quiz-view">
+              <i data-lucide="file-question"></i> Create Quiz
+            </button>
+          </div>
+          <div class="quizzes-container" id="quizzes-container">
+            <!-- Quizzes listing -->
+          </div>
+        </div>
+
+        <!-- Create Quiz Form Builder View -->
+        <div id="quiz-builder" class="quiz-builder-view hidden">
+          <div class="builder-header">
+            <button class="btn btn-secondary btn-small" id="builder-back-btn">
+              <i data-lucide="arrow-left"></i> Back to Quizzes
+            </button>
+            <h3>Quiz Builder</h3>
+          </div>
+
+          <div class="builder-layout">
+            <!-- Quiz metadata settings -->
+            <div class="glass-card builder-meta-card">
+              <h4>Quiz Details</h4>
+              <div class="form-group">
+                <label for="quiz-name">Quiz Name</label>
+                <input type="text" id="quiz-name" placeholder="e.g., Biology Midterm Practice" required>
+              </div>
+              <div class="form-group">
+                <label for="quiz-subject">Subject</label>
+                <input type="text" id="quiz-subject" placeholder="e.g., Biology">
+              </div>
+              <hr class="card-divider">
+              <!-- Add question sub-form -->
+              <div class="question-builder-subform">
+                <h4 style="margin-top: 0;">Add Question</h4>
+                <div class="form-group">
+                  <label for="q-text">Question</label>
+                  <input type="text" id="q-text" placeholder="e.g., What is the powerhouse of the cell?">
+                </div>
+                <div class="form-group">
+                  <label>Options</label>
+                  <div class="option-input-row">
+                    <input type="text" class="q-option" placeholder="Option A" id="q-opt-a">
+                    <input type="text" class="q-option" placeholder="Option B" id="q-opt-b">
+                  </div>
+                  <div class="option-input-row" style="margin-top: 8px;">
+                    <input type="text" class="q-option" placeholder="Option C" id="q-opt-c">
+                    <input type="text" class="q-option" placeholder="Option D" id="q-opt-d">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="q-correct">Correct Option</label>
+                  <select id="q-correct">
+                    <option value="0">Option A</option>
+                    <option value="1">Option B</option>
+                    <option value="2">Option C</option>
+                    <option value="3">Option D</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn-secondary btn-block" id="btn-add-q-to-list">
+                  <i data-lucide="plus"></i> Add Question to Quiz
+                </button>
+              </div>
+            </div>
+
+            <!-- Questions accumulated preview -->
+            <div class="glass-card builder-preview-card">
+              <div class="card-header">
+                <h4>Questions Added (<span id="builder-q-count">0</span>)</h4>
+                <button class="btn btn-primary btn-small" id="btn-save-entire-quiz">
+                  <i data-lucide="save"></i> Save Quiz
+                </button>
+              </div>
+              <div class="questions-list-preview" id="builder-questions-preview">
+                <p class="empty-state">No questions added yet. Construct one on the left!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Gameplay screen -->
+        <div id="quiz-gameplay" class="quiz-play-view hidden">
+          <div class="quiz-play-header">
+            <button class="btn btn-secondary btn-small" id="quiz-quit-btn">
+              Quit Quiz
+            </button>
+            <h3 id="play-quiz-title">Quiz Title</h3>
+            <span class="quiz-play-progress" id="play-progress-counter">Q 1 of 5</span>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="deck-progress-bar-container">
+            <div class="deck-progress-bar-fill" id="play-progress-bar" style="width: 20%"></div>
+          </div>
+
+          <div class="quiz-question-box glass-card">
+            <div class="quiz-question-text" id="play-question-text">Question text goes here?</div>
+            <div class="quiz-options-list" id="play-options-container">
+              <!-- Options rendered here -->
+            </div>
+            <!-- Feedback box -->
+            <div class="quiz-feedback-box hidden" id="play-feedback">
+              <p id="play-feedback-text">Correct!</p>
+              <button class="btn btn-primary" id="play-next-btn">Next Question <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Score Summary Screen -->
+        <div id="quiz-summary" class="quiz-summary-view hidden">
+          <div class="glass-card summary-card text-center">
+            <div class="summary-icon"><i data-lucide="trophy"></i></div>
+            <h2>Quiz Completed!</h2>
+            <h3 id="summary-quiz-name">Quiz Name</h3>
+            <div class="score-display">
+              <span id="summary-score">4</span> / <span id="summary-total">5</span>
+            </div>
+            <p id="summary-percentage">80% Score</p>
+            <div class="summary-actions">
+              <button class="btn btn-primary" id="summary-retry-btn">
+                <i data-lucide="rotate-ccw"></i> Retry Quiz
+              </button>
+              <button class="btn btn-secondary" id="summary-close-btn">
+                Return to Quizzes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View: Reminders -->
+      <div class="view-panel" id="view-reminders">
+        <div class="reminders-layout">
+          <!-- Create Reminder Form -->
+          <div class="glass-card reminder-form-card">
+            <h3>Set Study Alarm</h3>
+            <p class="card-desc">Set custom alarms that pop up even if you are browsing other tabs within StudyFlow.</p>
+            <form id="add-reminder-form">
+              <div class="form-group">
+                <label for="reminder-label">Alarm Label</label>
+                <input type="text" id="reminder-label" placeholder="e.g., Biology Review Session" required>
+              </div>
+              <div class="form-group">
+                <label for="reminder-time">Alert Time</label>
+                <input type="time" id="reminder-time" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                <i data-lucide="alarm-clock"></i> Set Alarm
+              </button>
+            </form>
+          </div>
+
+          <!-- Reminders List -->
+          <div class="reminders-list-card">
+            <h3>Configured Alarms</h3>
+            <div class="reminders-container" id="reminders-container">
+              <!-- Alarms render here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Create Deck Modal -->
+  <div class="modal-overlay hidden" id="create-deck-modal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Create New Flashcard Deck</h3>
+        <button class="btn-close-modal" id="close-deck-modal-btn"><i data-lucide="x"></i></button>
+      </div>
+      <form id="create-deck-form">
+        <div class="form-group">
+          <label for="deck-name">Deck Name</label>
+          <input type="text" id="deck-name" placeholder="e.g., Organic Chemistry, French Vocabulary" required>
+        </div>
+        <div class="form-group">
+          <label for="deck-description">Description (Optional)</label>
+          <input type="text" id="deck-description" placeholder="e.g., Chapter 1-3 fundamentals">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancel-deck-modal-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Deck</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Active Alarm Trigger Alert Modal -->
+  <div class="alarm-trigger-overlay hidden" id="alarm-trigger-overlay">
+    <div class="alarm-trigger-card">
+      <div class="alarm-bell-animation">
+        <i data-lucide="bell-ring"></i>
+      </div>
+      <h2 id="trigger-alarm-title">Biology Study Session</h2>
+      <p>Time to study! Focus timer is waiting for you.</p>
+      <div class="alarm-actions">
+        <button class="btn btn-primary btn-large" id="alarm-dismiss-btn">Dismiss Alarm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Modules -->
+  <script src="js/pomodoro.js"></script>
+  <script src="js/planner.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/quizzes.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

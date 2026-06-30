@@ -1,0 +1,14 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+.gemini/
+.antigravity-ide/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
