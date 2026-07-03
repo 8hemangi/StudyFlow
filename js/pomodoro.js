@@ -72,8 +72,8 @@
     document.querySelectorAll('.btn-preset').forEach(btn => {
       btn.addEventListener('click', (e) => {
         document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        setMode(e.target.dataset.mode);
+        e.currentTarget.classList.add('active');
+        setMode(e.currentTarget.dataset.mode);
       });
     });
 

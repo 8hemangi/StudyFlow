@@ -868,13 +868,19 @@ body {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
-  color: white;
+  color: var(--text-primary);
   font-family: var(--font-primary);
   font-size: 13px;
   text-align: center;
+  outline: none;
 }
 
 /* --- FLASHCARDS VIEW --- */
+.flashcards-home-grid {
+  display: flex;
+  flex-direction: column;
+}
+
 .decks-header-bar {
   display: flex;
   justify-content: space-between;
@@ -1123,6 +1129,17 @@ body {
 }
 
 /* --- QUIZ MAKER VIEW --- */
+.quiz-home-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-play-progress {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
 .quiz-header-bar {
   display: flex;
   justify-content: space-between;

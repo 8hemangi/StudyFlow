@@ -2,8 +2,7 @@
 (function () {
   let reminders = [];
   let alarmCheckInterval = null;
-  let activeAlarmNode = null;
-  let activeAlarmOsc = null;
+  let isAlarmPlaying = false;
 
   function init() {
     loadReminders();
@@ -148,10 +147,10 @@
     // Generate synthetic beep alarm sequence using Web Audio API
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      activeAlarmOsc = audioCtx;
-      
+      isAlarmPlaying = true;
+
       const playBeep = () => {
-        if (!activeAlarmOsc) return;
+        if (!isAlarmPlaying) return; // Stop loop when dismissed
 
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -167,7 +166,7 @@
         osc.start();
         osc.stop(audioCtx.currentTime + 0.4);
 
-        // Schedule next beep
+        // Schedule next beep only if still playing
         setTimeout(playBeep, 800);
       };
 
@@ -179,8 +178,8 @@
 
   function dismissActiveAlarm() {
     document.getElementById('alarm-trigger-overlay').classList.add('hidden');
-    // Stop the sound loop
-    activeAlarmOsc = null;
+    // Stop the sound loop by clearing the flag
+    isAlarmPlaying = false;
   }
 
   function escapeHTML(str) {

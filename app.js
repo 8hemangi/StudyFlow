@@ -33,7 +33,7 @@
   function setupTheme() {
     const toggleBtn = document.getElementById('theme-toggle-btn');
     const savedTheme = localStorage.getItem('studyflow_theme') || 'dark';
-    
+
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeToggleUI(savedTheme);
 
@@ -80,7 +80,7 @@
         // Set Page Title in Header
         const titleText = item.querySelector('span').innerText;
         document.getElementById('page-title').innerText = titleText;
-        
+
         // Custom header subtitles
         const subtitles = {
           dashboard: "Welcome back! Ready to excel today?",
@@ -113,7 +113,7 @@
     };
 
     updateClock();
-    setInterval(updateClock, 30000); // Update clock every 30 seconds
+    setInterval(updateClock, 1000); // Update clock every second
   }
 
   // --- RANDOM MOTIVATIONAL QUOTE ---
@@ -200,7 +200,7 @@
   }
 
   function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, 
+    return str.replace(/[&<>'"]/g,
       tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
     );
   }
